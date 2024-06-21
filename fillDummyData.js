@@ -5,6 +5,7 @@ const Course = require('./models/courseModel');
 const Rating = require('./models/ratingModel');
 const dbConnect = require('./config/dbconnect');
 
+
 // Connect to MongoDB
 dbConnect('mongodb://localhost:27017/test');
 
@@ -16,7 +17,7 @@ const createDummyUsers = async (numUsers = 10) => {
             email: faker.internet.email(),
             password: faker.internet.password(),
             role: faker.helpers.arrayElement(['user', 'admin', 'instructor']),
-            image: faker.image.url(),
+            image: 'images.png',
             // course: [faker.helpers.arrayElement(await Course.find())._id],
         });
     }
@@ -31,7 +32,7 @@ const createDummyCourses = async (numCourses = 10) => {
             // Assuming your Course model has these fields; adjust as necessary
             title: faker.lorem.sentence(),
             description: faker.lorem.paragraph(),
-            imageCover: faker.image.url(),
+            imageCover: 'images.png',
             videos: [faker.internet.url()],
             price: faker.commerce.price(),
             instructor: faker.helpers.arrayElement(await User.find())._id,
