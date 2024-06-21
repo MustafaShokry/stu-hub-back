@@ -9,7 +9,7 @@ const globalError = require("./middlewares/errorHandler");
 const routes = require("./utils");
 
 const app = express();
-// app.use(cors());
+app.use(cors());
 dotenv.config({ path: "config.env" });
 const port = process.env.PORT || 3000;
 if (process.env.NODE_ENV === "development") {
