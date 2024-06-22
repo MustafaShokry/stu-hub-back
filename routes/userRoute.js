@@ -20,6 +20,7 @@ router.put(
 );
 
 router.route("/:id").delete(protect, validator.checkUserId, controller.deleteUser);
+router.get("/:id", validator.checkUserId, controller.getUser);
 
 router.use(protect, permissions("admin"));
 
@@ -34,7 +35,7 @@ router
   )
   .get(controller.getUsers);
 
-router.get("/:id", validator.checkUserId, controller.getUser);
+
 
 
 module.exports = router;

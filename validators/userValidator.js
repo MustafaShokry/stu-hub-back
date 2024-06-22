@@ -96,11 +96,12 @@ exports.checkUserId = [
     .notEmpty()
     .withMessage("user ID required")
     .isMongoId()
-    .withMessage("course id is not valid").custom((value,{req})=>{
-      if(req.user.role !== "admin" && req.user._id.toString() !== value.toString()) {
-        throw new AppError("you can not access other user", 405);
-      }
-      return true
-    }),
+    .withMessage("course id is not valid"),
+    // .custom((value,{req})=>{
+    //   if(req.user.role !== "admin" && req.user._id.toString() !== value.toString()) {
+    //     throw new AppError("you can not access other user", 405);
+    //   }
+    //   return true
+    // }),
   validationMiddleWare,
 ];
