@@ -8,7 +8,7 @@ exports.getAll = (model) =>
     if (req.params.courseId) {
       fillter = { course: req.params.courseId };
     }
-    if(req.params.instructorId){
+    if (req.params.instructorId) {
       fillter = { instructor: req.params.instructorId };
     }
     const apiFeatures = await new ApiFeatures(model.find(fillter), req.query)
