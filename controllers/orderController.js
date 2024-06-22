@@ -35,7 +35,7 @@ exports.checkoutSession = expressAsyncHandler(async (req, res, next) => {
     },
     customer_email: req.user.email,
     client_reference_id: req.user._id.toString(),
-    success_url: `${req.protocol}://${req.get("host")}/order`,
+    success_url: `http://localhost:3000/courses/${courseData._id}`,
     cancel_url: `${req.protocol}://${req.get("host")}/cart`,
   });
   res.status(200).json({
@@ -61,7 +61,7 @@ exports.webhookCheckout = expressAsyncHandler(async (req, res, next) => {
   }
   console.log(event.type);
   if (event.type === "checkout.session.completed") {
-    console.log(event.data.object);
+    // console.log(event.data.object);
     const data = await user.findByIdAndUpdate(
       event.data.object.client_reference_id,
       { $addToSet: { course: event.data.object.metadata.id } },
