@@ -46,16 +46,20 @@ exports.checkoutSession = expressAsyncHandler(async (req, res, next) => {
 
 exports.webhookCheckout = expressAsyncHandler(async (req, res, next) => {
   const sig = req.headers["stripe-signature"];
+  const rawBody = req.rawBody;
+  const secret = process.env.stripe_wsecret;
   let event;
   try {
     event = Stripe.webhooks.constructEvent(
-      req.body,
+      rawBody,
       sig,
-      process.env.stripe_secret
+      secret
     );
   } catch (err) {
+    console.log(err);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
+  console.log(event.type);
   if (event.type === "checkout.session.completed") {
     console.log(event.data.object);
     const data = await user.findByIdAndUpdate(

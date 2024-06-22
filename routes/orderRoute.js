@@ -7,6 +7,6 @@ const router = express.Router()
 
 router.post("/checkoutSession/:id",protect,checkcourseId,checkoutSession)
 
-router.post("/webhookCheckout",webhookCheckout)
+router.post("/webhookCheckout", webhookCheckout)
 
 module.exports = router

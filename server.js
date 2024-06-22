@@ -9,6 +9,14 @@ const globalError = require("./middlewares/errorHandler");
 const routes = require("./utils");
 
 const app = express();
+app.use(
+  '/api/v1/order/webhookCheckout',
+  express.raw({ type: 'application/json' }),
+  (req, res, next) => {
+    req.rawBody = req.body;
+    next();
+  }
+);
 app.use(cors());
 dotenv.config({ path: "config.env" });
 const port = process.env.PORT || 3000;
