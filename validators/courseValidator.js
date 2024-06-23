@@ -185,19 +185,19 @@ exports.checkcourseId = [
     .notEmpty()
     .withMessage("course ID required")
     .isMongoId()
-    .withMessage("course id is not valid")
-    .custom(async (value, { req }) => {
-      const courseData = await courseModel.findById(value);
-      if (!courseData) {
-        throw new AppError("Course not found", 404);
-      }
-      if (
-        courseData.instructor.toString() !== req.user._id.toString() &&
-        req.user.role !== "admin"
-      ) {
-        throw new AppError("you are not allowed to access this course", 404);
-      }
-      return true;
-    }),
+    .withMessage("course id is not valid"),
+    // .custom(async (value, { req }) => {
+    //   const courseData = await courseModel.findById(value);
+    //   if (!courseData) {
+    //     throw new AppError("Course not found", 404);
+    //   }
+    //   if (
+    //     courseData.instructor.toString() !== req.user._id.toString() &&
+    //     req.user.role !== "admin"
+    //   ) {
+    //     throw new AppError("you are not allowed to access this course", 404);
+    //   }
+    //   return true;
+    // }),
   validationMiddleWare,
 ];
