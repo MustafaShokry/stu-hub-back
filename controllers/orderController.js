@@ -35,7 +35,7 @@ exports.checkoutSession = expressAsyncHandler(async (req, res, next) => {
     },
     customer_email: req.user.email,
     client_reference_id: req.user._id.toString(),
-    success_url: `http://localhost:3000/courses`,
+    success_url: `http://localhost:3000/courses/${courseData._id}`,
     cancel_url: `${req.protocol}://${req.get("host")}/cart`,
   });
   res.status(200).json({
