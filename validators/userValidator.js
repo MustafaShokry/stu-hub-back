@@ -60,7 +60,7 @@ exports.updateUser = [
     .custom(async () => {
       throw new AppError("you can not change  user password from here", 404);
     }),
-    check("course")
+  check("course")
     .optional()
     .custom(async () => {
       throw new AppError("you can not change  user password from here", 404);
@@ -78,16 +78,16 @@ exports.updateUser = [
   check("role")
     .optional()
     .isString()
-    .withMessage("role should be a string")
-    .custom((value, { req }) => {
-      if (req.user.role !== "admin") {
-        throw new AppError("only admin can change role", 405);
-      }
-      if (value === "admin" || value === "user" || value === "instructor") {
-        return true;
-      }
-      throw new AppError("only user and admin allowed in role", 405);
-    }),
+    .withMessage("role should be a string"),
+  // .custom((value, { req }) => {
+  //   if (req.user.role !== "admin") {
+  //     throw new AppError("only admin can change role", 405);
+  //   }
+  //   if (value === "admin" || value === "user" || value === "instructor") {
+  //     return true;
+  //   }
+  //   throw new AppError("only user and admin allowed in role", 405);
+  // }),
   validationMiddleWare,
 ];
 
@@ -97,11 +97,11 @@ exports.checkUserId = [
     .withMessage("user ID required")
     .isMongoId()
     .withMessage("course id is not valid"),
-    // .custom((value,{req})=>{
-    //   if(req.user.role !== "admin" && req.user._id.toString() !== value.toString()) {
-    //     throw new AppError("you can not access other user", 405);
-    //   }
-    //   return true
-    // }),
+  // .custom((value,{req})=>{
+  //   if(req.user.role !== "admin" && req.user._id.toString() !== value.toString()) {
+  //     throw new AppError("you can not access other user", 405);
+  //   }
+  //   return true
+  // }),
   validationMiddleWare,
 ];
